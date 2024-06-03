@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+// Load .env file if it exists
+const dotenv = require('dotenv').config()
 const WebSocket = require('ws')
 const http = require('http')
 const number = require('lib0/number')
