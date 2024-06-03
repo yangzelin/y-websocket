@@ -1,15 +1,15 @@
 #!/usr/bin/env node
 
-// Load .env file if it exists
-const dotenv = require('dotenv').config()
 const WebSocket = require('ws')
 const http = require('http')
 const number = require('lib0/number')
+const env = require('lib0/environment')
 const wss = new WebSocket.Server({ noServer: true })
 const setupWSConnection = require('./utils.cjs').setupWSConnection
 
-const host = process.env.HOST || 'localhost'
-const port = number.parseInt(process.env.PORT || '1234')
+// const host = process.env.HOST || 'localhost'
+const host = env.ensureConf('HOST') || 'localhost'
+const port = number.parseInt(env.ensureConf('PORT') || '1234')
 
 const server = http.createServer((_request, response) => {
   response.writeHead(200, { 'Content-Type': 'text/plain' })
